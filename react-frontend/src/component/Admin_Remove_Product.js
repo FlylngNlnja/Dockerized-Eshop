@@ -116,7 +116,7 @@ const Admin_Remove_Product = () => {
     return (
         <>
         <DataTable
-            title="Users"
+            title="Products"
             columns={columns}
             data={result}
             pagination={true}
