@@ -120,7 +120,6 @@ const Admin_Remove_Product = () => {
             columns={columns}
             data={result}
             pagination={true}
-            fixedHeader={true}
             striped={true}
             highlightOnHover={true}
             progressPending={pending}

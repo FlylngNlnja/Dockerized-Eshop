@@ -116,7 +116,6 @@ const Admin_Remove_User = () => {
             columns={columns}
             data={result}
             pagination={true}
-            fixedHeader={true}
             striped={true}
             highlightOnHover={true}
             progressPending={pending}

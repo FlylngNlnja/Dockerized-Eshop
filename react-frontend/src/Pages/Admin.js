@@ -72,10 +72,9 @@ function Admin() {
                                     </div>
                                 </div>
                                 <div style={{
-                                    width: "100vw",
+                                    width: "100%",
                                     display: "flex",
                                     flexDirection: "column",
-
                                 }}>
                                     {showFields.add_user && <Admin_Add_User />}
                                     {showFields.add_product && <Admin_Add_Product />}
