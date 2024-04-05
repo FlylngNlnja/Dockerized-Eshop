@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import DataTable from 'react-data-table-component';
 function MyProfile() {
   const [orderData, setOrderData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,90 +59,162 @@ function MyProfile() {
     setPopupVisible(true);
   };
 
+  const columns = [
+    {
+      name: 'Order ID',
+      selector: row => <strong>{row.id}</strong>,
+    },
+    {
+      name: 'Total Products',
+      selector: row => <strong>{calculateTotalPrice(row).totalProducts}</strong>,
+    },
+    {
+      name: 'Total Price',
+      selector: row => <strong>{calculateTotalPrice(row).totalPrice + " $"}</strong>,
+    },
+  ];
+  const columnsNested = [
+        {
+          name: 'Product',
+          selector: row => row.productId.name,
+        },
+      {
+          name: 'Product price',
+          selector: row => row.productId.price + " $",
+      },
+      {
+          name: 'Quantity',
+          selector: row => row.quantity,
+      }
+  ];
+    const ExpanableComponent = ({data}) =>{
+        console.log(data.quantities);
+        return(
+        <DataTable
+            columns={columnsNested}
+            data={data.quantities}
+        />
+    );}
   return (
-    <div className="layout-wrapper layout-content-navbar">
-      <div className="layout-container">
-        <div className="layout-page">
-          <div className="content-wrapper">
-            <div className="container-xxl flex-grow-1 container-p-y">
-              <div className="row">
-                <div className="col-md-12">
-                  {orderData.map((order, index) => (
-                    <div key={index}>
-                      <div className="card mb-4">
-                        <div className="card-body"></div>
-                        <hr className="my-0" />
-                        <div className="card-body">
-                          <div className="card">
-                            <div className="table-responsive text-nowrap">
-                              <table className="table">
-                                <thead>
-                                  <tr>
-                                    <th>Αρ. παραγγελίας</th>
-                                    <th>Αριθμός προϊόντων</th>
-                                    <th>Σύνολο</th>
-                                    <th>View all Products</th>
-                                  </tr>
-                                </thead>
-                                <tbody className="table-border-bottom-0">
-                                  <tr>
-                                    <td>
-                                      <i className="fab fa-bootstrap fa-lg text-primary me-3"></i>{" "}
-                                      <strong>{order.id}</strong>
-                                    </td>
-                                    <td>{calculateTotalPrice(order).totalProducts}</td>
-                                    <td>{calculateTotalPrice(order).totalPrice}$</td>
-                                    <td>
-                                      <button className="btn btn-secondary" type="button" onClick={() => handleViewAllProducts(order)}>
-                                        View all Products
-                                      </button>
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Check if the current order is selected and show the corresponding popup */}
-                      {selectedOrder && selectedOrder.id === order.id && popupVisible && (
-                        <div className="popup-container">
-                          <div className="popup2" style={{ padding: '20px' }}> {/* Add inline style for padding */}
-                            <h2>All Products</h2>
-                            <table>
-                              <thead>
-                                <tr>
-                                  <th>Name</th>
-                                  <th>Quantity</th>
-                                  <th>Price</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {productsInfo.map((product, index) => (
-                                  <tr key={index}>
-                                    <td>{product.name}</td>
-                                    <td style={{ paddingRight: '20px' }}>{product.quantity}</td> {/* Adjust the spacing between quantity and price */}
-                                    <td>{product.price}$</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                            <button className="btn btn-secondary" onClick={() => setPopupVisible(false)}>Close</button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className="content-backdrop fade"></div>
-          </div>
-        </div>
-      </div>
-      <div className="layout-overlay layout-menu-toggle"></div>
-    </div>
+      <DataTable
+          title="Orders"
+          columns={columns}
+          data={orderData}
+          pagination={true}
+          fixedHeader={true}
+          striped={true}
+          highlightOnHover={true}
+          expandableRows
+          expandableRowsComponent={ExpanableComponent}
+      />
   );
+      // <div className="layout-wrapper layout-content-navbar">
+      //   <div className="layout-container">
+      //     <div className="layout-page">
+      //       <div className="content-wrapper">
+      //         <div className="container-xxl flex-grow-1 container-p-y">
+      //           <div className="row">
+      //             <div className="col-md-12">
+      //               <div className="card mb-4">
+      //                 <div className="card-body"></div>
+      //                 <hr className="my-0"/>
+      //                 <div className="card-body">
+      //                   <div className="card">
+      //                     <div className="table-responsive text-nowrap">
+      //                       <div className="row">
+      //                         <div className="col-sm text-center">Αρ. παραγγελίας</div>
+      //                         <div className="col-sm text-center">Αριθμός προϊόντων</div>
+      //                         <div className="col-sm text-center">Σύνολο</div>
+      //                         <div className="col-sm text-center">View all Products</div>
+      //                       </div>
+      //                       {orderData.length === 0 ? (
+      //                           <div style={{
+      //                             width: "100%",
+      //                             fontSize: "50px",
+      //                             textAlign: "center",
+      //                             verticalAlign: "middle"
+      //                           }}>No orders available</div>
+      //                       ) : (
+      //
+      //                           orderData.map((order, index) => (
+      //
+      //                               <>
+      //                                 <div key={index} className="row mt-3">
+      //                                   <div className="col-sm text-center"><strong>{order.id}</strong></div>
+      //                                   <div className="col-sm text-center"><strong>{calculateTotalPrice(order).totalProducts}$</strong>
+      //                                   </div>
+      //                                   <div className="col-sm text-center"><strong>{calculateTotalPrice(order).totalPrice}$</strong></div>
+      //                                   <div className="col-sm text-center">
+      //                                     <button className="btn btn-secondary btn-success" type="button"
+      //                                             onClick={() => handleViewAllProducts(order)}>
+      //                                             View
+      //                                       </button>
+      //                                   </div>
+      //                                 </div>
+                                      {/*<tr>*/}
+                                      {/*  <td>*/}
+                                      {/*    <i className="fab fa-bootstrap fa-lg text-primary me-3"></i>{" "}*/}
+                                      {/*    <strong>{order.id}</strong>*/}
+                                      {/*  </td>*/}
+                                      {/*  <td>{calculateTotalPrice(order).totalProducts}</td>*/}
+                                      {/*  <td>{calculateTotalPrice(order).totalPrice}$</td>*/}
+                                      {/*  <td>*/}
+                                      {/*    <button className="btn btn-secondary" type="button"*/}
+                                      {/*            onClick={() => handleViewAllProducts(order)}>*/}
+                                      {/*      View all Products*/}
+                                      {/*    </button>*/}
+                                      {/*  </td>*/}
+                                      {/*</tr>*/}
+
+
+                                      {/* Check if the current order is selected and show the corresponding popup */}
+      {/*                                {selectedOrder && selectedOrder.id === order.id && popupVisible && (*/}
+      {/*                                    <div className="popup-container">*/}
+      {/*                                      <div className="popup2"*/}
+      {/*                                           style={{padding: '20px'}}> /!* Add inline style for padding *!/*/}
+      {/*                                        <h2>All Products</h2>*/}
+      {/*                                        <table>*/}
+      {/*                                          <thead>*/}
+      {/*                                          <tr>*/}
+      {/*                                            <th>Name</th>*/}
+      {/*                                            <th>Quantity</th>*/}
+      {/*                                            <th>Price</th>*/}
+      {/*                                          </tr>*/}
+      {/*                                          </thead>*/}
+      {/*                                          <tbody>*/}
+      {/*                                          {productsInfo.map((product, index) => (*/}
+      {/*                                              <tr key={index}>*/}
+      {/*                                                <td>{product.name}</td>*/}
+      {/*                                                <td style={{paddingRight: '20px'}}>{product.quantity}</td>*/}
+      {/*                                                /!* Adjust the spacing between quantity and price *!/*/}
+      {/*                                                <td>{product.price}$</td>*/}
+      {/*                                              </tr>*/}
+      {/*                                          ))}*/}
+      {/*                                          </tbody>*/}
+      {/*                                        </table>*/}
+      {/*                                        <button className="btn btn-danger"*/}
+      {/*                                                onClick={() => setPopupVisible(false)}>Close*/}
+      {/*                                        </button>*/}
+      {/*                                      </div>*/}
+      {/*                                    </div>*/}
+      {/*                                )}*/}
+      {/*                              </>*/}
+      {/*                          ))*/}
+      {/*                      )}*/}
+      {/*                    </div>*/}
+      {/*                  </div>*/}
+      {/*                </div>*/}
+      {/*              </div>*/}
+      {/*            </div>*/}
+      {/*          </div>*/}
+      {/*        </div>*/}
+      {/*        <div className="content-backdrop fade"></div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*  <div className="layout-overlay layout-menu-toggle"></div>*/}
+      {/*</div>*/}
+  // );
 }
 
 export default MyProfile;

@@ -57,15 +57,15 @@ function Home() {
                 <button className="button">
 
                     <img src="Media/laptop.png" alt="Image" />
-                    <Link to="/PC_Laptops" className="text-dark nav-item nav-link text-decoration-none"> PC & Laptops </Link>
+                    <Link className="text-light nav-item nav-link text-decoration-none text-center w-100"  to="Products/3">PC & Laptops</Link>
                 </button>
                 <button className="button">
                     <img src="Media/phones.png" alt="Image" />
-                    <Link to="/Smartphones" className="text-dark nav-item nav-link text-decoration-none"> Smartphones </Link>
+                    <Link className="text-light nav-item nav-link text-decoration-none text-center w-100"  to="Products/1">Smartphones</Link>
                 </button>
                 <button className="button">
                     <img src="Media/tv.png" alt="Image" />
-                    <Link to="/TVs" className="text-dark nav-item nav-link text-decoration-none"> Τηλεοράσεις </Link>
+                    <Link className="text-light nav-item nav-link text-decoration-none text-center w-100"  to="Products/2">Τηλεοράσεις</Link>
                 </button>
             </div>
 

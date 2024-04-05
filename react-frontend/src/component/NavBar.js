@@ -12,6 +12,7 @@ const NavBar = () => {
     const [isLoggedin, setLoggedin] = useState(false);
     const [cart, setCart] = useState([]);
     const [totalCost, setTotalCost] = useState(0);
+
     useEffect(() => {
         if (sessionStorage.getItem('token')) {
             $('#isshow').hide();

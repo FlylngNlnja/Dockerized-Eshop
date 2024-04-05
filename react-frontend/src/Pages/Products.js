@@ -31,29 +31,53 @@ const Products = () => {
       cart[product.id] = 1;
     }
     sessionStorage.setItem('Cart', JSON.stringify(cart));
+    let notification = document.createElement("div");
+    notification.className = "alert-success";
+    notification.style = "margin:10px;color:black;"
+    notification.innerHTML = product.name + " added to cart";
+    const notifhere = document.querySelector(".NotificationsHere")
+    notifhere.insertBefore(notification, notifhere.firstChild);
+    setTimeout(() => {
+      if (document.body.contains(notification)) {
+        document.querySelector(".NotificationsHere").removeChild(notification);
+      }
+    }, 3000);
+
   };
 
-  return (
-    <div className="products-container">
-      {products.map(product => (
-        <div key={product.id} className="product-container">
-          <div className="product-box">
-            <div className="b-container">
-              <img src={product.photo} alt="Product" />
-              <div className="product-details">
-                <h3>{product.name}</h3>
-              </div>
-            </div>
-          </div>
-          <div className="price-box">
-            <p>{product.price}€</p>
-            <button onClick={() => addToCart(product)}>
-               <img src="/Media/Cart.png" alt="Cart Icon" />
-            </button>
-          </div>
+  return (<>
+        <div>
+        <div className="NotificationsHere " style={{
+          height:"10vh",
+          overflow:"hidden",
+          marginBottom:"10px",
+          maxWidth: "1200px",
+          margin: "10px auto"
+        }}>
         </div>
-      ))}
-    </div>
+        <div className="products-container">
+          {products.map(product => (
+              <div key={product.id} className="product-container">
+                <div className="product-box">
+                  <div className="b-container">
+                    <img src={product.photo} alt="Product"/>
+                    <div className="product-details">
+                      <h3>{product.name}</h3>
+                    </div>
+                  </div>
+                </div>
+                <div className="price-box">
+                  <p>{product.price}€</p>
+                  <button onClick={() => addToCart(product)}>
+                    <img src="/Media/Cart.png" alt="Cart Icon"/>
+                  </button>
+                </div>
+              </div>
+          ))}
+        </div>
+        </div>
+
+      </>
   );
 };
 

@@ -18,7 +18,12 @@ const CartPage = () => {
         const items = JSON.parse(sessionStorage.getItem('Cart')) || [];
         storedItemsRef.current = items; // Update the ref value
         GetTableData();
-    }, []);
+
+        // Check for token existence and redirect if needed
+        if (!sessionStorage.getItem('token')) {
+            navigate('/Login');
+        }
+    }, [navigate]);
 
     const handleChange = (field, value) => {
         setFormData((prevFormData) => ({
@@ -97,84 +102,82 @@ const CartPage = () => {
         }
     };
 
-    return (
-        <div className="cart-container">
-            <h1 className="cart-title">Καλάθι Αγορών</h1>
-            <ul className="cart-items">
-                {cartItems.map(item => (
-                    <li key={item.id} className="cart-item">
-                        <div className="item-details">
-                            <img src={item.photo} alt={item.name} className="item-photo" />
-                            <div>
-                                <p className="item-name">{item.name}</p>
-                                <p className="item-price">{item.price}€</p>
-                            </div>
+    return (<div className="cart-container">
+        <h1 className="cart-title">Καλάθι Αγορών</h1>
+        <ul className="cart-items">
+            {cartItems.map(item => (
+                <li key={item.id} className="cart-item">
+                    <div className="item-details">
+                        <img src={item.photo} alt={item.name} className="item-photo"/>
+                        <div>
+                            <p className="item-name">{item.name}</p>
+                            <p className="item-price">{item.price}€</p>
                         </div>
-                        <div className="action-buttons">
-                            <button className="delete-button" onClick={() => removeItem(item.id)}>
-                                <img src="Media/delete.png" alt="Διαγραφή" className="delete-icon" />
-                            </button>
-                            <div className="input-container">
-                                <div> {storedItemsRef.current[item.id]} </div>
-                            </div>
+                    </div>
+                    <div className="action-buttons">
+                        <button className="delete-button" onClick={() => removeItem(item.id)}>
+                            <img src="Media/delete.png" alt="Διαγραφή" className="delete-icon"/>
+                        </button>
+                        <div className="input-container">
+                            <div> {storedItemsRef.current[item.id]} </div>
                         </div>
-                    </li>
-                ))}
-            </ul>
+                    </div>
+                </li>
+            ))}
+        </ul>
 
-            <div style={{width:"100%",display:"flex",justifyContent:"space-between"}}>
+        <div style={{width: "100%", display: "flex", justifyContent: "space-between"}}>
             <div className="cart-total">
                 Συνολικό Κόστος: {totalCost}€
             </div>
-                <Form onSubmit={send_order}>
-                    <Row>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="cardNumber">
-                                <Form.Label>Card Number</Form.Label>
-                                <Form.Control
-                                    style={{width:"100%"}}
-                                    type="number"
-                                    placeholder="5323 **** **** 5342"
-                                    onChange={(e) => handleChange('cardNumber', e.target.value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="holderName">
-                                <Form.Label>Holder name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="John doe"
-                                    onChange={(e) => handleChange('holderName', e.target.value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="expireDate">
-                                <Form.Label>Expiry Date</Form.Label>
-                                <Form.Control
-                                    type="date"
-                                    placeholder="12/5/2027"
-                                    onChange={(e) => handleChange('expireDate', e.target.value)}
-                                />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <div className="d-grid gap-2">
-                            <Button variant="primary" type="submit" className="btn btn-outline-info mb-6">
-                                ΟΛΟΚΛΗΡΩΣΗ ΠΑΡΑΓΓΕΛΙΑΣ
-                            </Button>
-                        </div>
-                    </Row>
-                </Form>
-            </div>
+            <Form onSubmit={send_order}>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3" controlId="cardNumber">
+                            <Form.Label>Card Number</Form.Label>
+                            <Form.Control
+                                style={{width: "100%"}}
+                                type="number"
+                                placeholder="5323 **** **** 5342"
+                                onChange={(e) => handleChange('cardNumber', e.target.value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3" controlId="holderName">
+                            <Form.Label>Holder name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="John doe"
+                                onChange={(e) => handleChange('holderName', e.target.value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group className="mb-3" controlId="expireDate">
+                            <Form.Label>Expiry Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                placeholder="12/5/2027"
+                                onChange={(e) => handleChange('expireDate', e.target.value)}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <div className="d-grid gap-2">
+                        <Button variant="primary" type="submit" className="btn btn-outline-info mb-6">
+                            ΟΛΟΚΛΗΡΩΣΗ ΠΑΡΑΓΓΕΛΙΑΣ
+                        </Button>
+                    </div>
+                </Row>
+            </Form>
         </div>
-    );
+    </div> )
 };
 
 export default CartPage;
