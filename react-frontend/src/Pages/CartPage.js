@@ -34,6 +34,9 @@ const CartPage = () => {
     const send_order = async (e) => {
 
         e.preventDefault();
+        if(formData["cardNumber"].length!==16){return;}
+        if(formData["holderName"]===""){return;}
+        if(formData["expireDate"]===""){return;}
         if (storedItemsRef.current.length === 0) {
             return;
         }

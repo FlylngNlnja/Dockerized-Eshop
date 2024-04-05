@@ -32,8 +32,8 @@ const Products = () => {
     }
     sessionStorage.setItem('Cart', JSON.stringify(cart));
     let notification = document.createElement("div");
-    notification.className = "alert-success";
-    notification.style = "margin:10px;color:black;"
+    notification.className = "alert alert-success";
+    notification.style = "margin:10px; color:black;"
     notification.innerHTML = product.name + " added to cart";
     const notifhere = document.querySelector(".NotificationsHere")
     notifhere.insertBefore(notification, notifhere.firstChild);
@@ -66,11 +66,11 @@ const Products = () => {
                     </div>
                   </div>
                 </div>
-                <div className="price-box">
+                <div className="price-box" onClick={() => addToCart(product)}>
                   <p>{product.price}€</p>
-                  <button onClick={() => addToCart(product)}>
+                  <div className="add_to_cart_button">
                     <img src="/Media/Cart.png" alt="Cart Icon"/>
-                  </button>
+                  </div>
                 </div>
               </div>
           ))}

@@ -24,8 +24,18 @@
   transition: transform 0.3s ease-in-out;
 }
 
+.price-box:active .add_to_cart_button{
+  transform: scale(1.2) rotate(20deg);
+  transition: transform 0.05s ease-in-out;
+}
+
+.price-box:active {
+  background: linear-gradient(0deg, #fff4e0, transparent);
+  transition: transform 0.05s ease-in-out;
+}
+
 .product-box:hover {
-  background-color: white;
+  background: linear-gradient(0deg, #e2efff, transparent);
   transform: translateY(-5px);
 }
 
@@ -56,6 +66,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+  cursor: pointer;
 }
 
 .price-box p {
@@ -65,13 +76,13 @@
   margin: 0;
 }
 
-.price-box button {
+.price-box div {
   border: none;
   background: none;
   cursor: pointer;
 }
 
-.price-box button img {
+.price-box div img {
   width: 24px;
   height: 24px;
 }

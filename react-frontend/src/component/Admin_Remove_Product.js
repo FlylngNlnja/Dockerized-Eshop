@@ -125,6 +125,7 @@ const Admin_Remove_Product = () => {
             highlightOnHover={true}
             progressPending={pending}
             actions={<input onChange={handleInputChange} className="search-input" type="text" value={search}/>}
+
         />
         </>);
 };

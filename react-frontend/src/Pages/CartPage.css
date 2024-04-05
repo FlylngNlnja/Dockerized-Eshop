@@ -146,7 +146,9 @@ input[type="number"]::-webkit-outer-spin-button:before {
 }
 
 .action-buttons {
-    display: flex;
+    display: grid;
+    grid-template-columns: 57px 25px;
+    padding-left: 15px;
     align-items: center;
 }
 

@@ -84,14 +84,14 @@ function MyProfile() {
             sortable: true,
 
         },
+    {
+      name: 'Quantity',
+      selector: row => row.quantity,
+      sortable: true,
+    },
       {
           name: 'Product price',
           selector: row => row.productId.price + " $",
-          sortable: true,
-      },
-      {
-          name: 'Quantity',
-          selector: row => row.quantity,
           sortable: true,
       }
   ];
@@ -101,6 +101,7 @@ function MyProfile() {
         <DataTable
             columns={columnsNested}
             data={data.quantities}
+            right={true}
             theme="dark"
         />
     );}
