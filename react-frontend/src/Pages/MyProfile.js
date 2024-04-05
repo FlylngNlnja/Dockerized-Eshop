@@ -62,29 +62,37 @@ function MyProfile() {
   const columns = [
     {
       name: 'Order ID',
-      selector: row => <strong>{row.id}</strong>,
+      selector: row => row.id,
+        sortable: true,
     },
     {
       name: 'Total Products',
-      selector: row => <strong>{calculateTotalPrice(row).totalProducts}</strong>,
+      selector: row => calculateTotalPrice(row).totalProducts,
+        sortable: true,
     },
     {
       name: 'Total Price',
-      selector: row => <strong>{calculateTotalPrice(row).totalPrice + " $"}</strong>,
+      selector: row => calculateTotalPrice(row).totalPrice + " $",
+        sortable: true,
+
     },
   ];
   const columnsNested = [
         {
           name: 'Product',
           selector: row => row.productId.name,
+            sortable: true,
+
         },
       {
           name: 'Product price',
           selector: row => row.productId.price + " $",
+          sortable: true,
       },
       {
           name: 'Quantity',
           selector: row => row.quantity,
+          sortable: true,
       }
   ];
     const ExpanableComponent = ({data}) =>{
@@ -93,6 +101,7 @@ function MyProfile() {
         <DataTable
             columns={columnsNested}
             data={data.quantities}
+            theme="dark"
         />
     );}
   return (
@@ -108,113 +117,7 @@ function MyProfile() {
           expandableRowsComponent={ExpanableComponent}
       />
   );
-      // <div className="layout-wrapper layout-content-navbar">
-      //   <div className="layout-container">
-      //     <div className="layout-page">
-      //       <div className="content-wrapper">
-      //         <div className="container-xxl flex-grow-1 container-p-y">
-      //           <div className="row">
-      //             <div className="col-md-12">
-      //               <div className="card mb-4">
-      //                 <div className="card-body"></div>
-      //                 <hr className="my-0"/>
-      //                 <div className="card-body">
-      //                   <div className="card">
-      //                     <div className="table-responsive text-nowrap">
-      //                       <div className="row">
-      //                         <div className="col-sm text-center">Αρ. παραγγελίας</div>
-      //                         <div className="col-sm text-center">Αριθμός προϊόντων</div>
-      //                         <div className="col-sm text-center">Σύνολο</div>
-      //                         <div className="col-sm text-center">View all Products</div>
-      //                       </div>
-      //                       {orderData.length === 0 ? (
-      //                           <div style={{
-      //                             width: "100%",
-      //                             fontSize: "50px",
-      //                             textAlign: "center",
-      //                             verticalAlign: "middle"
-      //                           }}>No orders available</div>
-      //                       ) : (
-      //
-      //                           orderData.map((order, index) => (
-      //
-      //                               <>
-      //                                 <div key={index} className="row mt-3">
-      //                                   <div className="col-sm text-center"><strong>{order.id}</strong></div>
-      //                                   <div className="col-sm text-center"><strong>{calculateTotalPrice(order).totalProducts}$</strong>
-      //                                   </div>
-      //                                   <div className="col-sm text-center"><strong>{calculateTotalPrice(order).totalPrice}$</strong></div>
-      //                                   <div className="col-sm text-center">
-      //                                     <button className="btn btn-secondary btn-success" type="button"
-      //                                             onClick={() => handleViewAllProducts(order)}>
-      //                                             View
-      //                                       </button>
-      //                                   </div>
-      //                                 </div>
-                                      {/*<tr>*/}
-                                      {/*  <td>*/}
-                                      {/*    <i className="fab fa-bootstrap fa-lg text-primary me-3"></i>{" "}*/}
-                                      {/*    <strong>{order.id}</strong>*/}
-                                      {/*  </td>*/}
-                                      {/*  <td>{calculateTotalPrice(order).totalProducts}</td>*/}
-                                      {/*  <td>{calculateTotalPrice(order).totalPrice}$</td>*/}
-                                      {/*  <td>*/}
-                                      {/*    <button className="btn btn-secondary" type="button"*/}
-                                      {/*            onClick={() => handleViewAllProducts(order)}>*/}
-                                      {/*      View all Products*/}
-                                      {/*    </button>*/}
-                                      {/*  </td>*/}
-                                      {/*</tr>*/}
 
-
-                                      {/* Check if the current order is selected and show the corresponding popup */}
-      {/*                                {selectedOrder && selectedOrder.id === order.id && popupVisible && (*/}
-      {/*                                    <div className="popup-container">*/}
-      {/*                                      <div className="popup2"*/}
-      {/*                                           style={{padding: '20px'}}> /!* Add inline style for padding *!/*/}
-      {/*                                        <h2>All Products</h2>*/}
-      {/*                                        <table>*/}
-      {/*                                          <thead>*/}
-      {/*                                          <tr>*/}
-      {/*                                            <th>Name</th>*/}
-      {/*                                            <th>Quantity</th>*/}
-      {/*                                            <th>Price</th>*/}
-      {/*                                          </tr>*/}
-      {/*                                          </thead>*/}
-      {/*                                          <tbody>*/}
-      {/*                                          {productsInfo.map((product, index) => (*/}
-      {/*                                              <tr key={index}>*/}
-      {/*                                                <td>{product.name}</td>*/}
-      {/*                                                <td style={{paddingRight: '20px'}}>{product.quantity}</td>*/}
-      {/*                                                /!* Adjust the spacing between quantity and price *!/*/}
-      {/*                                                <td>{product.price}$</td>*/}
-      {/*                                              </tr>*/}
-      {/*                                          ))}*/}
-      {/*                                          </tbody>*/}
-      {/*                                        </table>*/}
-      {/*                                        <button className="btn btn-danger"*/}
-      {/*                                                onClick={() => setPopupVisible(false)}>Close*/}
-      {/*                                        </button>*/}
-      {/*                                      </div>*/}
-      {/*                                    </div>*/}
-      {/*                                )}*/}
-      {/*                              </>*/}
-      {/*                          ))*/}
-      {/*                      )}*/}
-      {/*                    </div>*/}
-      {/*                  </div>*/}
-      {/*                </div>*/}
-      {/*              </div>*/}
-      {/*            </div>*/}
-      {/*          </div>*/}
-      {/*        </div>*/}
-      {/*        <div className="content-backdrop fade"></div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*  <div className="layout-overlay layout-menu-toggle"></div>*/}
-      {/*</div>*/}
-  // );
 }
 
 export default MyProfile;
