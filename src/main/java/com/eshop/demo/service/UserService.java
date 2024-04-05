@@ -31,6 +31,9 @@ public class UserService {
         this.jwtService=jwtService;
     }
 
+    public List<User> getUsers(){
+        return userDAO.findAll();
+    }
     //REGISTER FUNCTION
     public User addUser(RegistrationBody registrationBody) throws UserAlreadyExists {
         //NOT ALLOWED TO PASS 2 SAME RECORDS

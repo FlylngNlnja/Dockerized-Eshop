@@ -32,7 +32,6 @@ function Admin() {
             const apiUrl = 'http://localhost:8080/admin';
             if (!sessionStorage.getItem('token')) { return_error_403(); return; }
             try {
-                console.log('Bearer ' + sessionStorage.getItem('token'));
                 const response = await fetch(apiUrl, {
                     method: 'GET',
                     headers: {
@@ -73,12 +72,10 @@ function Admin() {
                                     </div>
                                 </div>
                                 <div style={{
-                                    marginTop: "2vh",
                                     width: "100vw",
-                                    alignSelf: "center",
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems: "center",
+
                                 }}>
                                     {showFields.add_user && <Admin_Add_User />}
                                     {showFields.add_product && <Admin_Add_Product />}

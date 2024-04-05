@@ -31,8 +31,12 @@ public class ProductDAOImpl implements ProductDAO{
             products.addAll(query.getResultList());
         }
         return products;
+    }
 
-
+    @Override
+    public List<Product> findAll(){
+        TypedQuery<Product> query = entityManager.createQuery("FROM Product p", Product.class);
+        return query.getResultList();
     }
 
     @Override

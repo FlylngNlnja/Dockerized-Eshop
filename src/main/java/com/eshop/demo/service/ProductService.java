@@ -29,6 +29,10 @@ public class ProductService {
         return productDAO.findProducts();
     }
 
+    public List<Product>  getProducts(){
+        return productDAO.findAll();
+    }
+
     public List<Product>  searchProducts(String keyword)  {
 
         return productDAO.searchProducts(keyword);

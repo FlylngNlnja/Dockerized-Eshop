@@ -25,6 +25,13 @@ public class UserController{
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+    @GetMapping("/Admin/Users")
+    public ResponseEntity<?> getUsers(@AuthenticationPrincipal User user){
+        if(user==null){
+            return new ResponseEntity<>("The user is not authorized", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+    }
     @DeleteMapping("/Users/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable int userId) throws UserNotFound {
         return new ResponseEntity<>(userService.deleteUser(userId),HttpStatus.OK);

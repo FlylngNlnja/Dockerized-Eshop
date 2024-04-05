@@ -1,129 +1,132 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Col, Form, InputGroup, Row, Button } from 'react-bootstrap';
 import $ from "jquery";
 import {useNavigate} from "react-router-dom";
+import DataTable from "react-data-table-component";
 
 
 
 const Admin_Remove_Product = () => {
     const [formData, setFormData] = useState({
-        productId: ''
+        userId: ''
     });
     const [regAlert, setRegAlert] = useState('');
     const [sucAlert, setSucAlert] = useState('');
+    const [pending, setPending] = React.useState(true);
     const navigate = useNavigate();
-    const handleChange = (field, value) => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [field]: value,
-        }));
-    };
+    const [data, setData] = useState([]);
+    const [search, setSearch] = useState('');
+    const [result, setResult] = useState(['']);
 
-    $(document).ready(function() {
-        $("#RegAlert").hide();
-        $("#SucAlert").hide();
-    });
-    const popalert = (toprint) => {
-        setRegAlert(toprint);
-        setTimeout(() => {
-            setRegAlert('');
-        }, 5000);
+    useEffect(() => {
+        RetrieveData();
+    }, []);
+    useEffect(() => {
+        setResult(data.filter((item) => {
+            let searchLower = search.toLowerCase();
+            let idMatch = String(item.id).toLowerCase().includes(searchLower);
+            let nameMatch = item.name.toLowerCase().includes(searchLower);
+            let categoryMatch = item.category.categoryName.toLowerCase().includes(searchLower);
+            let brandMatch = item.brandName.toLowerCase().includes(searchLower);
+            return idMatch || nameMatch || categoryMatch || brandMatch;
+        }));
+    }, [search]);
+
+    const handleInputChange = (e) => {
+        setSearch(e.target.value);
     };
-    const SucAlert = (toprint) => {
-        setSucAlert(toprint);
-        setTimeout(() => {
-            setSucAlert('');
-        }, 5000);
-    };
-    function validationcheck(){
-        if(formData.productId.length < 1){popalert("The id is invalid"); return false;}
-        return true;
-    }
-    function getCookieValue(cname) {
-        // cname is the cookie name (foo) which value you are after
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        // Assuming you have an API endpoint to handle the form data.
-        if (!validationcheck()){return;}
-        const apiUrl = 'http://localhost:8080/Products/'+ formData.productId;
+    const handleButtonClick = async (e, id) => {
         try {
-            const response = await fetch(apiUrl, {
+            const response = await fetch('http://localhost:8080/Products/'+id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + getCookieValue("token")
-                },
-                body: JSON.stringify(formData),
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                }
             });
-
             if (response.ok) {
-                setFormData({
-                    productId: ''
-                });
-                SucAlert("Product deleted successfully!");
-                e.target.reset();
-            } else {
-                popalert("Product was not found!");
+                RetrieveData();
             }
         } catch (error) {
-            popalert("There was an error. Please wait or contact developer");
-            console.error('Error submitting form:', error);
+            console.error('Error retrieving data:', error);
         }
-    };
-    return (
-        <div id="registerform">
-            <div className="card mb-4">
-                <div className="card-body">
-                    <h3 className= "text-center font-weight-bold">DELETE PRODUCT</h3>
-                </div>
-                <hr className="my-0" />
-                <div className="card-body">
-                    {regAlert && <div className='alert alert-danger' role='alert'>{regAlert}</div>}
-                    {sucAlert && <div className='alert alert-success' role='alert'>{sucAlert}</div>}
-                    <div className="row">
-                        <div className="mb-3 col-md-12">
-                            <Form onSubmit={handleSubmit}>
-                                <Row>
-                                    <Col>
-                                        <Form.Group className="mb-6" controlId="productId">
-                                            <Form.Label>Product ID</Form.Label>
-                                            <Form.Control
-                                                type="number"
-                                                placeholder="001"
-                                                onChange={(e) => handleChange('productId', e.target.value)}
-                                            />
-                                        </Form.Group>
-                                    </Col>
+    }
+    const RetrieveData = async (e) => {
+        try {
+            const response = await fetch('http://localhost:8080/Products', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
+                }
+            });
+            if (response.ok) {
+                const responseData = await response.json();
+                setData(responseData);
+                setPending(false);
+                setResult(responseData.filter((item) => {
+                    return item.name.toLowerCase().includes(search.toLowerCase());
+                }));
+            }
+        } catch (error) {
+            console.error('Error retrieving data:', error);
+        }
+    }
 
-                                </Row>
-                                <Row>
-                                    <div className="d-grid gap-2">
-                                        <Button variant="primary" type="submit" className="btn btn-outline-info mb-6">
-                                            SUBMIT
-                                        </Button>
-                                    </div>
-                                </Row>
-                            </Form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+    const columns = [
+        {
+            name: 'ID',
+            selector: row => row.id,
+            sortable: true,
+        },
+        {
+            name: 'Name',
+            selector: row => row.name,
+            sortable: true,
+        },
+        {
+            name: 'Price',
+            selector: row => row.price + " $",
+            sortable: true,
+        },{
+            name: 'Category',
+            selector: row => row.category.categoryName,
+            sortable: true,
+        },
+        ,{
+            name: 'Brand',
+            selector: row => row.brandName,
+            sortable: true,
+        },
+        {
+            name: "Actions",
+            button: true,
+            cell: (row) => (
+                <button
+                    className="btn btn-outline btn-xs btn-danger"
+                    onClick={(e) => handleButtonClick(e, row.id)}
+                >
+                    Delete
+                </button>
+            ),
+        },
+
+    ];
+
+    return (
+        <>
+        <DataTable
+            title="Users"
+            columns={columns}
+            data={result}
+            pagination={true}
+            fixedHeader={true}
+            striped={true}
+            highlightOnHover={true}
+            progressPending={pending}
+            actions={<input onChange={handleInputChange} className="search-input" type="text" value={search}/>}
+        />
+        </>);
 };
 
 

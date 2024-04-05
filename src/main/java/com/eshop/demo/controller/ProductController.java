@@ -1,6 +1,7 @@
 package com.eshop.demo.controller;
 
 import com.eshop.demo.entity.Product;
+import com.eshop.demo.entity.User;
 import com.eshop.demo.exception.CategoryNotFound;
 import com.eshop.demo.exception.ProductNotFound;
 import com.eshop.demo.model.ProductBody;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,6 +37,13 @@ public class ProductController{
     @PostMapping("/Products")
     public ResponseEntity<Product> addProduct(@RequestBody ProductBody productBody) throws CategoryNotFound{
         return new ResponseEntity<>(productService.addProduct(productBody),HttpStatus.OK) ;
+    }
+    @GetMapping("/Products")
+    public ResponseEntity<?> getProducts(@AuthenticationPrincipal User user){
+        if(user==null){
+            return new ResponseEntity<>("The user is not authorized", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(productService.getProducts(),HttpStatus.OK) ;
     }
 
     @DeleteMapping("/Products/{productId}")

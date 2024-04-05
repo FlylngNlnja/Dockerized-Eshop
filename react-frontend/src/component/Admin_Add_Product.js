@@ -47,22 +47,6 @@ const Admin_Add_Product = () => {
         if(formData.photo.length < 1){popalert("The photo is empty"); return false;}
         return true;
     }
-    function getCookieValue(cname) {
-        // cname is the cookie name (foo) which value you are after
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         // Assuming you have an API endpoint to handle the form data.
@@ -73,7 +57,7 @@ const Admin_Add_Product = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + getCookieValue("token")
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('token')
                 },
                 body: JSON.stringify(formData),
             });
