@@ -7,13 +7,7 @@ import DataTable from "react-data-table-component";
 
 
 const Admin_Remove_Product = () => {
-    const [formData, setFormData] = useState({
-        userId: ''
-    });
-    const [regAlert, setRegAlert] = useState('');
-    const [sucAlert, setSucAlert] = useState('');
     const [pending, setPending] = React.useState(true);
-    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
     const [result, setResult] = useState(['']);

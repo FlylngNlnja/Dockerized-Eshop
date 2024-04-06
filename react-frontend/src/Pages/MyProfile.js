@@ -7,7 +7,11 @@ function MyProfile() {
   const [productsInfo, setProductsInfo] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null); // State to track the selected order
   const token = sessionStorage.getItem('token');
-
+  let colors = {
+    "Pending": "warning",
+    "Cancelled": "danger",
+    "Complete": "success"
+  }
   useEffect(() => {
     const fetchOrderData = async () => {
       try {
@@ -74,6 +78,13 @@ function MyProfile() {
       name: 'Total Price',
       selector: row => calculateTotalPrice(row).totalPrice + " $",
         sortable: true,
+
+    },
+    {
+      name: 'Status',
+      selector: row => row.status,
+      cell: row => <span className={`text-${colors[row.status]}`}>{row.status}</span>,
+      sortable: true,
 
     },
   ];

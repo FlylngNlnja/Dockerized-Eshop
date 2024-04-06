@@ -13,7 +13,6 @@ const Admin_Add_Product = () => {
     });
     const [regAlert, setRegAlert] = useState('');
     const [sucAlert, setSucAlert] = useState('');
-    const navigate = useNavigate();
     const handleChange = (field, value) => {
         setFormData((prevFormData) => ({
             ...prevFormData,

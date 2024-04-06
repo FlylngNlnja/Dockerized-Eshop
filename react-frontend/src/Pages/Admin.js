@@ -6,13 +6,15 @@ import Admin_Add_Product from "../component/Admin_Add_Product";
 import Admin_Remove_Product from "../component/Admin_Remove_Product";
 import Admin_Remove_User from "../component/Admin_Remove_User";
 import { useNavigate } from "react-router-dom";
+import Admin_Edit_Order from "../component/Admin_Edit_Order";
 
 function Admin() {
     const [showFields, setShowFields] = useState({
         add_user: true,
         remove_user: false,
         add_product: false,
-        remove_product: false
+        remove_product: false,
+        edit_order: false
     });
     const [adminContent, setAdminContent] = useState(null);
 
@@ -59,7 +61,7 @@ function Admin() {
                                      }}>
                                     <div style={{
                                         display: "grid",
-                                        gridTemplateColumns: "auto auto auto auto",
+                                        gridTemplateColumns: "auto auto auto auto auto",
                                         gridTemplateRows: "auto",
                                         width: "100%",
                                         zIndex: "1"
@@ -68,7 +70,7 @@ function Admin() {
                                         <button onClick={() => toggleField("remove_user")}>Remove User</button>
                                         <button onClick={() => toggleField("add_product")}>Add Product</button>
                                         <button onClick={() => toggleField("remove_product")}>Remove Product</button>
-
+                                        <button onClick={() => toggleField("edit_order")}>Edit order</button>
                                     </div>
                                 </div>
                                 <div style={{
@@ -80,6 +82,7 @@ function Admin() {
                                     {showFields.add_product && <Admin_Add_Product />}
                                     {showFields.remove_product && <Admin_Remove_Product />}
                                     {showFields.remove_user && <Admin_Remove_User />}
+                                    {showFields.edit_order && <Admin_Edit_Order />}
                                 </div>
 
                             </>
