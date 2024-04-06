@@ -33,9 +33,10 @@ const Products = () => {
     sessionStorage.setItem('Cart', JSON.stringify(cart));
     let notification = document.createElement("div");
     notification.className = "alert";
-    notification.style = " color:black;background-color: #d4edda;";
+    notification.style = " color:black;background-color: #d4edda;border-radius: 0!important;";
     notification.innerHTML = product.name + " added to cart";
     const notifhere = document.querySelector(".NotificationsHere")
+    notifhere.innerHTML = null;
     notifhere.insertBefore(notification, notifhere.firstChild);
     setTimeout(() => {
       if (document.body.contains(notification)) {
@@ -46,16 +47,16 @@ const Products = () => {
   };
 
   return (<>
-        <div>
-        <div className="NotificationsHere " style={{
-          height: "7vh",
-          overflow: "hidden",
-          margin: "10px auto",
-          width: "100vw",
-          position: "sticky",
-          top: "95%",
-          zIndex: "999"
-        }}>
+        <div style={{paddingBottom:"5em"}}>
+          <div className="NotificationsHere" style={{
+            height: "200px",
+            overflow: "hidden",
+            margin: "10px auto",
+            width: "100vw",
+            position: "fixed",
+            top: "100px",  // Changed from 'top' to 'bottom'
+            zIndex: "999"
+          }}>
         </div>
         <div className="products-container">
           {products.map(product => (
