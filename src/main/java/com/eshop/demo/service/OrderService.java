@@ -28,11 +28,8 @@ public class OrderService {
     public WebOrder saveOrder(User user, OrderBody orderBody){
         Payment payment = new Payment(orderBody.getCardNumber(), orderBody.getHolderName(), orderBody.getExpireDate());
         Optional<Payment> pay = paymentDAO.findByCardNumber(orderBody.getCardNumber());
-        if(pay.isPresent()){
-            payment=pay.get();
-        }else {
-            payment = paymentDAO.save(payment);
-        }
+        payment = pay.isPresent()?pay.get():paymentDAO.save(payment);
+
         /*int id=0;
         for(var elem:user.getAddresses()){
             if(elem.getAddressLine1().equals(orderBody.getAddressLine1())){//1 user can't have 2 same addresses so this is going to be true 1 only time
@@ -62,13 +59,11 @@ public class OrderService {
     }
     public String updateOrderStatus(int id,String status)throws IllegalArgumentException{
         Optional<WebOrder> webOrder = webOrderDAO.findById(id);
-        if(webOrder.isEmpty()){
-            throw new IllegalArgumentException("There is no order with this id ");
-        }else{
-            WebOrder webOrder1 = webOrder.get();
-            webOrder1.setStatus(status);
-            webOrderDAO.save(webOrder1);
-            return "The order updated successfully with the new status";
-        }
+        if(webOrder.isEmpty()){throw new IllegalArgumentException("There is no order with this id ");}
+        WebOrder webOrder1 = webOrder.get();
+        webOrder1.setStatus(status);
+        webOrderDAO.save(webOrder1);
+        return "The order updated successfully with the new status";
+
     }
 }

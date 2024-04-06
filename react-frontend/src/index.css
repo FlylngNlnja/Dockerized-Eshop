@@ -155,8 +155,7 @@
   margin-top: -48px; /* Μετακίνηση προς τα πάνω κατά 10px */
 }
 
-.rotate-on-hover {
-  transition: transform 0.5s ease-in-out;
+.top_right_button {
   background-color: transparent;
   border: none;
   padding: 0;
@@ -165,7 +164,7 @@
   height: 30px;
   overflow: hidden;
   float: right; /* Τοποθετούμε τα κουμπιά δεξιά */
-  margin-top: 0px;
+  cursor: pointer;
 }
 
 .rotate-on-hover img {
@@ -173,9 +172,6 @@
   height: 100%;
 }
 
-.rotate-on-hover:hover {
-  transform: rotate(360deg);
-}
 
   .dot {
     height: 15px;

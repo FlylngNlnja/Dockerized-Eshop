@@ -110,6 +110,9 @@ input[type="number"]::-webkit-outer-spin-button:before {
     .cart-container {
         flex-direction: column!important;
     }
+    .cart-container .cart-items{
+        width: 100%;
+    }
     .cartTotalcontainer{
         width: 100%;
         padding-left:0;
