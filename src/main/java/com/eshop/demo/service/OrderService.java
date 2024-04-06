@@ -3,6 +3,7 @@ package com.eshop.demo.service;
 import com.eshop.demo.DAO.*;
 import com.eshop.demo.entity.*;
 import com.eshop.demo.model.OrderBody;
+import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,20 @@ public class OrderService {
     }
     public List<WebOrder> showOrders(User user){
         return webOrderDAO.findByUserId(user.getId());
+    }
+
+    public List<WebOrder> showAllOrders(){
+        return webOrderDAO.findAll();
+    }
+    public String updateOrderStatus(int id,String status)throws IllegalArgumentException{
+        Optional<WebOrder> webOrder = webOrderDAO.findById(id);
+        if(webOrder.isEmpty()){
+            throw new IllegalArgumentException("There is no order with this id ");
+        }else{
+            WebOrder webOrder1 = webOrder.get();
+            webOrder1.setStatus(status);
+            webOrderDAO.save(webOrder1);
+            return "The order updated successfully with the new status";
+        }
     }
 }

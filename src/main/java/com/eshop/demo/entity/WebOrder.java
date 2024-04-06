@@ -23,6 +23,8 @@ public class WebOrder {
     @OneToOne
     @JoinColumn(name = "payment_id")
     private Payment payment;
+    @Column(name = "status")
+    private String status;
 
     public WebOrder() {
     }
@@ -31,6 +33,7 @@ public class WebOrder {
         this.user = user;
         this.address = address;
         this.payment = payment;
+        this.status="Pending";
     }
 
     public int getId() {
@@ -73,12 +76,21 @@ public class WebOrder {
         this.payment = payment;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public void addQuantities(List<WebOrderQuantities> webOrderQuantities){
         if(quantities==null){
             quantities=new ArrayList<>();
         }
         quantities.addAll(webOrderQuantities);
     }
+
 
     @Override
     public String toString() {

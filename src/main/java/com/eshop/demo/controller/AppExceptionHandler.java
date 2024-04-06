@@ -34,6 +34,10 @@ public class AppExceptionHandler {
     public ResponseEntity<String> handleException(UsernameOrEmailAlreadyExists usernameOrEmailAlreadyExists){
         return new ResponseEntity<>(usernameOrEmailAlreadyExists.getMessage(), HttpStatus.CONFLICT);
     }
+    @ExceptionHandler
+    public ResponseEntity<String> handleException(IllegalArgumentException IllegalArgumentException){
+        return new ResponseEntity<>(IllegalArgumentException.getMessage(), HttpStatus.NOT_FOUND);
+    }
 
 
 }
