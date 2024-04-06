@@ -32,8 +32,8 @@ const Products = () => {
     }
     sessionStorage.setItem('Cart', JSON.stringify(cart));
     let notification = document.createElement("div");
-    notification.className = "alert alert-success";
-    notification.style = "margin:10px; color:black;"
+    notification.className = "alert";
+    notification.style = " color:black;background-color: #d4edda;";
     notification.innerHTML = product.name + " added to cart";
     const notifhere = document.querySelector(".NotificationsHere")
     notifhere.insertBefore(notification, notifhere.firstChild);
@@ -48,11 +48,13 @@ const Products = () => {
   return (<>
         <div>
         <div className="NotificationsHere " style={{
-          height:"10vh",
-          overflow:"hidden",
-          marginBottom:"10px",
-          maxWidth: "1200px",
-          margin: "10px auto"
+          height: "7vh",
+          overflow: "hidden",
+          margin: "10px auto",
+          width: "100vw",
+          position: "sticky",
+          top: "95%",
+          zIndex: "999"
         }}>
         </div>
         <div className="products-container">

@@ -1,18 +1,18 @@
 .sticky_top button{
-    background: #273e77;
+    background: #07a95d;
     color:white;
     border:0;
     font-weight: 700;
 }
 .sticky_top button:nth-child(odd){
-    background: #1b2c56;
+    background: #20b46d;
     color:white;
     border:0;
 }
 
 
 .sticky_top button:hover{
-    background: #121f46;
+    background: #008a4a;
     color:white;
     border:0;
 }

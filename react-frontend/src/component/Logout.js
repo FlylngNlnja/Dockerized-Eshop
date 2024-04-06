@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './NavBar.css';
 
 
@@ -7,10 +7,12 @@ const Logout = () => {
     function myprofileinfo(){
         window.location.href = "/MyProfileInfo";
     }
+    const navigate = useNavigate();
 
     function logout(){
         if(sessionStorage.getItem('token')){
             sessionStorage.removeItem("token");
+            navigate('/');
             window.location.reload();
         }
     }
