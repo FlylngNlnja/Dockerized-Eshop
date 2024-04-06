@@ -3,11 +3,13 @@ package com.eshop.demo.service;
 import com.eshop.demo.DAO.*;
 import com.eshop.demo.entity.*;
 import com.eshop.demo.model.OrderBody;
+import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -40,13 +42,33 @@ public class OrderService {
         }*/
         Address address = addressDAO.findById(user.getAddresses().get(0).getId()).get();
         WebOrder webOrder = new WebOrder(user,address,payment);
-        for(var elem:orderBody.getProductQuantities().keySet()){
+        /*for(var elem:orderBody.getProductQuantities().keySet()){
             webOrder.addQuantities(new WebOrderQuantities(webOrder,productDAO.findProductById(elem),orderBody.getProductQuantities().get(elem)));
-        }
+        }*/
+
+        List<WebOrderQuantities> webOrderQuantities = orderBody.getProductQuantities().keySet().stream()
+                .map(product-> new WebOrderQuantities(webOrder,productDAO.findProductById(product),orderBody.getProductQuantities().get(product))
+        ).toList();
+        webOrder.addQuantities(webOrderQuantities);
         webOrderDAO.save(webOrder);
         return webOrder;
     }
     public List<WebOrder> showOrders(User user){
         return webOrderDAO.findByUserId(user.getId());
+    }
+
+    public List<WebOrder> showAllOrders(){
+        return webOrderDAO.findAll();
+    }
+    public String updateOrderStatus(int id,String status)throws IllegalArgumentException{
+        Optional<WebOrder> webOrder = webOrderDAO.findById(id);
+        if(webOrder.isEmpty()){
+            throw new IllegalArgumentException("There is no order with this id ");
+        }else{
+            WebOrder webOrder1 = webOrder.get();
+            webOrder1.setStatus(status);
+            webOrderDAO.save(webOrder1);
+            return "The order updated successfully with the new status";
+        }
     }
 }
