@@ -34,7 +34,7 @@ public class OrderController {
     //TODO: SHOW ORDERS
     @GetMapping("/orders")
     public ResponseEntity<?> showOrders(@AuthenticationPrincipal User user)  {
-        List<WebOrder> orders;
+        //List<WebOrder> orders;
         if(user==null){
             return new ResponseEntity<>("The user is not authorize",HttpStatus.UNAUTHORIZED);
         }else {

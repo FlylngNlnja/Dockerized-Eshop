@@ -8,6 +8,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -40,9 +41,14 @@ public class OrderService {
         }*/
         Address address = addressDAO.findById(user.getAddresses().get(0).getId()).get();
         WebOrder webOrder = new WebOrder(user,address,payment);
-        for(var elem:orderBody.getProductQuantities().keySet()){
+        /*for(var elem:orderBody.getProductQuantities().keySet()){
             webOrder.addQuantities(new WebOrderQuantities(webOrder,productDAO.findProductById(elem),orderBody.getProductQuantities().get(elem)));
-        }
+        }*/
+
+        List<WebOrderQuantities> webOrderQuantities = orderBody.getProductQuantities().keySet().stream()
+                .map(product-> new WebOrderQuantities(webOrder,productDAO.findProductById(product),orderBody.getProductQuantities().get(product))
+        ).toList();
+        webOrder.addQuantities(webOrderQuantities);
         webOrderDAO.save(webOrder);
         return webOrder;
     }
