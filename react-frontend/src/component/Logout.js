@@ -19,7 +19,7 @@ const Logout = () => {
     return (
         <div id="regpopup">
             <button className="login-button" onClick={myprofileinfo}>My Profile</button>
-            <button className="login-button" onClick={logout}> Logout </button>
+            <button className="logout-button" onClick={logout}> Logout </button>
         </div>
 
     );
