@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Col, Row, Dropdown } from 'react-bootstrap';
 import LogRegPopup from './LogRegPopup';
@@ -12,7 +12,19 @@ const NavBar = () => {
     const [isLoggedin, setLoggedin] = useState(false);
     const [cart, setCart] = useState([]);
     const [totalCost, setTotalCost] = useState(0);
+    const popupRef = useRef(null);
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (popupRef.current && !popupRef.current.contains(event.target)) {
+                setProfilePopupOpen(false);
+            }
+        }
 
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     useEffect(() => {
         if (sessionStorage.getItem('token')) {
             $('#isshow').hide();
@@ -71,19 +83,19 @@ const NavBar = () => {
                     <div className="container" style={{justifyContent: "flex-end",height:"100%"}}>
                         <div className="top_right_button">
                         <button className="text-decoration-none text-white" onClick={toggleProfilePopup} style={{background:"none",border:"none",cursor:"pointer"}}>
-                            <i className="fa-solid fa-user"></i>
+                            <i className="fa-solid fa-user fa-2x"></i>
                         </button>
                         </div>
                         <div className="top_right_button">
                         <Link className="text-decoration-none text-white"  to="/CartPage" style={{cursor:"pointer"}}>
-                            <i className="fa-solid fa-cart-shopping"></i>
+                            <i className="fa-solid fa-cart-shopping fa-2x"></i>
                         </Link>
                             '</div>
                     </div>
                 </div>
                 <div id="isshow">
                     {isProfilePopupOpen ? (
-                        <div className="popup" id="regpopup">
+                        <div className="popup" id="regpopup" ref={popupRef}>
                             {isLoggedin ? <Logout/> : (
                                 <div id="regpopup">
                                     <div style={{color: "black", marginTop: "1em"}}>Already Registered?</div>

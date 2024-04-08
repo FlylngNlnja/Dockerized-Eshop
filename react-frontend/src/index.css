@@ -155,6 +155,7 @@ display:block;
 .container {
   text-align: right; /* Κείμενο δεξιά */
   margin-top: -48px; /* Μετακίνηση προς τα πάνω κατά 10px */
+
 }
 
 .top_right_button {
@@ -162,11 +163,13 @@ display:block;
   border: none;
   padding: 0;
   margin: 0 10px; /* Προσθήκη κενού 5px μεταξύ των κουμπιών */
-  width: 30px;
+  width: 60px;
   height: 30px;
   overflow: hidden;
   float: right; /* Τοποθετούμε τα κουμπιά δεξιά */
   cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .rotate-on-hover img {
