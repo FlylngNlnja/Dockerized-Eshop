@@ -56,7 +56,7 @@ const NavBar = () => {
                     <div style={{display:"flex",width:"100%",height:"100%"}}>
                         <Link to="/" className="text-white nav-item nav-link text-decoration-none" style={{fontWeight:"700",height:"100%",width:"100%",display:"flex",alignItems:"center",justifyContent: "center"}}> Home </Link>
                         {isLoggedin && (<Link to="/MyProfile" className="text-white nav-item nav-link text-decoration-none" style={{fontWeight:"700",height:"100%",width:"100%",display:"flex",alignItems:"center",justifyContent: "center"}}>Orders</Link>)}
-                        <Dropdown>
+                        <Dropdown className="nav-item">
                             <Dropdown.Toggle  className="text-white nav-item nav-link text-decoration-none" id="dropdown-basic" style={{height:"100%",width:"100%",fontWeight:"700"}}>
                                 Products
                             </Dropdown.Toggle>

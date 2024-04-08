@@ -55,7 +55,8 @@ const Products = () => {
             width: "100vw",
             position: "fixed",
             top: "100px",  // Changed from 'top' to 'bottom'
-            zIndex: "999"
+            zIndex: "999",
+            pointerEvents: "none"
           }}>
         </div>
         <div className="products-container">

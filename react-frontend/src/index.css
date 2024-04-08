@@ -45,6 +45,7 @@
     justify-content: center; /* Κεντράρει τα αντικείμενα κατά οριζόντιο άξονα */
     font-family: Arial, sans-serif;
     flex-direction: row; /* Αλλαγή του κατευθυντήριου άξονα σε οριζόντιο */
+    padding:100px;
   }
 
 
@@ -127,8 +128,7 @@
 }
 
 .slideshow-container {
-  max-width: 800px; /* Διατηρεί την αναλογία πλάτους/ύψους */
-  max-height: 400px; /* Ορίζει το μέγιστο ύψος */
+
   width: auto;
   height: auto;
   position: relative;
@@ -138,8 +138,7 @@
 }
 
 .mySlides {
-  display: none;
-
+display:block;
 }
 
 

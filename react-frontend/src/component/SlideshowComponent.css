@@ -6,7 +6,8 @@
 
 /* Slides */
 .mySlides {
-  display: none;
+  display: flex;
+  flex-direction: column;
   border-radius: 20px;
 }
 
@@ -30,10 +31,12 @@
   cursor: pointer;
 }
 
-/* Active dot */
-.active {
-  background-color: #717171;
+.dot.active{
+  background-color: #298513;
 }
+
+/* Active dot */
+
 
 /* Center the dots */
 .slideshow-container div.text-center {
