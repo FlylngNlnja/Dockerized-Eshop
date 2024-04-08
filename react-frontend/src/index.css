@@ -173,7 +173,7 @@ display:block;
 }
 
 .top_right_button:hover i{
-  color: #39977E;
+  color: #c0c0c0;
 }
 .rotate-on-hover img {
   width: 100%;
@@ -195,7 +195,7 @@ display:block;
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #39977E;
+    background: #297a65;
   }
 
 
