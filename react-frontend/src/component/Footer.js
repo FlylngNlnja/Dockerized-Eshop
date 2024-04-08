@@ -16,10 +16,9 @@ const Footer = () => {
                       rel="noreferrer"> Christos M.</a>
                </div>
                <div className="Frameworks">
-                   <i className="fa-solid fa-power-off fa-4x" style={{color: "#000000"}}></i>
-                   <i className="fa-brands fa-react fa-4x" style={{color: "#3ab7ff"}}></i>
-                   <i className="fa-brands fa-js fa-4x" style={{color: "#eeca13"}}></i>
-                   <i className="fa-brands fa-github fa-4x" style={{color: "#000000"}}></i>
+
+                   <a  target="_blank" href="https://react.dev/"><i className="fa-brands fa-react fa-9x" style={{color: "#3ab7ff"}}> </i></a>
+
                </div>
            </div>
 
