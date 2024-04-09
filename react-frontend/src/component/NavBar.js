@@ -67,7 +67,7 @@ const NavBar = () => {
                 <div style={{display:"flex",width:"100%",height:"100%"}}>
                     <div style={{display:"flex",width:"100%",height:"100%"}}>
                         <Link to="/" className="text-white nav-item nav-link text-decoration-none" style={{fontWeight:"700",height:"100%",width:"100%",display:"flex",alignItems:"center",justifyContent: "center"}}> Home </Link>
-                        {isLoggedin && (<Link to="/MyProfile" className="text-white nav-item nav-link text-decoration-none" style={{fontWeight:"700",height:"100%",width:"100%",display:"flex",alignItems:"center",justifyContent: "center"}}>Orders</Link>)}
+
                         <Dropdown className="nav-item">
                             <Dropdown.Toggle  className="text-white nav-item nav-link text-decoration-none" id="dropdown-basic" style={{height:"100%",width:"100%",fontWeight:"700"}}>
                                 Products
@@ -78,6 +78,7 @@ const NavBar = () => {
                                 <Link className="text-dark nav-item nav-link text-decoration-none"  to="Products/2">Τηλεοράσεις</Link>
                             </Dropdown.Menu>
                         </Dropdown>
+                        {isLoggedin && (<Link to="/MyProfile" className="text-white nav-item nav-link text-decoration-none" style={{fontWeight:"700",height:"100%",width:"100%",display:"flex",alignItems:"center",justifyContent: "center"}}>Orders</Link>)}
                     </div>
 
                     <div className="container" style={{justifyContent: "flex-end",height:"100%"}}>
