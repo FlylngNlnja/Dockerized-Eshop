@@ -33,7 +33,7 @@ const Products = () => {
     sessionStorage.setItem('Cart', JSON.stringify(cart));
     let notification = document.createElement("div");
     notification.className = "alert";
-    notification.style = " color:black;background-color: #d4edda;border-radius: 0!important;";
+    notification.style = " color:black;background-color: #FFF872;border-radius: 0!important;";
     notification.innerHTML = product.name + " added to cart";
     const notifhere = document.querySelector(".NotificationsHere")
     notifhere.innerHTML = null;
