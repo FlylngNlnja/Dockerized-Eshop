@@ -18,7 +18,7 @@ const Logout = () => {
     }
     return (
         <div id="regpopup">
-            <button className="login-button" onClick={myprofileinfo}>My Profile</button>
+            <Link className="login-button" to="/MyProfileInfo">Profile</Link>
             <button className="logout-button" onClick={logout}> Logout </button>
         </div>
 
