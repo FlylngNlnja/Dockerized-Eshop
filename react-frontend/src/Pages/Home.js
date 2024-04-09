@@ -9,21 +9,20 @@ function Home() {
             <SlideshowComponent/>
             <div className="button-container">
 
-                <button className="button">
+                <Link className="text-light nav-item nav-link text-decoration-none text-center" to="Products/3"><button className="button">
                     <img src="Media/laptop.png" alt="Image"/>
-                    <Link className="text-light nav-item nav-link text-decoration-none text-center w-100"
-                          to="Products/3">PC & Laptops</Link>
-                </button>
-                <button className="button">
+                    <div className="text-center w-100"> PC & Laptops </div>
+                </button></Link>
+                <Link className="text-light nav-item nav-link text-decoration-none text-center" to="Products/1"><button className="button">
                     <img src="Media/phones.png" alt="Image"/>
-                    <Link className="text-light nav-item nav-link text-decoration-none text-center w-100"
-                          to="Products/1">Smartphones</Link>
-                </button>
-                <button className="button">
-                    <img src="Media/tv.png" alt="Image"/>
-                    <Link className="text-light nav-item nav-link text-decoration-none text-center w-100"
-                          to="Products/2">Τηλεοράσεις</Link>
-                </button>
+                    <div className="text-center w-100"> Smartphones </div>
+                </button></Link>
+                <Link className="text-light nav-item nav-link text-decoration-none text-center" to="Products/2">
+                    <button className="button">
+                        <img src="Media/tv.png" alt="Image"/>
+                        <div className="text-center w-100"> Τηλεοράσεις </div>
+                    </button>
+                </Link>
             </div>
         </>
 
