@@ -83,14 +83,14 @@ const NavBar = () => {
 
                     <div className="container" style={{justifyContent: "flex-end",height:"100%"}}>
                         <div className="top_right_button">
-                        <button className="text-decoration-none text-white" onClick={toggleProfilePopup} style={{background:"none",border:"none",cursor:"pointer"}}>
-                            <i className="fa-solid fa-user fa-2x"></i>
-                        </button>
+                            <button className="text-decoration-none text-white" onClick={toggleProfilePopup} style={{background:"none",border:"none",cursor:"pointer"}}>
+                                <i className="fa-solid fa-user fa-2x"></i>
+                            </button>
                         </div>
                         <div className="top_right_button">
-                        <Link className="text-decoration-none text-white"  to="/CartPage" style={{cursor:"pointer"}}>
-                            <i className="fa-solid fa-cart-shopping fa-2x"></i>
-                        </Link>
+                            <Link className="text-decoration-none text-white"  to="/CartPage" style={{cursor:"pointer"}}>
+                                <i className="fa-solid fa-cart-shopping fa-2x"></i>
+                            </Link>
                             '</div>
                     </div>
                 </div>
@@ -100,15 +100,16 @@ const NavBar = () => {
                             {isLoggedin ? <Logout/> : (
                                 <div id="regpopup">
                                     <div style={{color: "black", marginTop: "1em"}}>Already Registered?</div>
-                                    <button className="login-button" onClick={toggleProfilePopup}><Link to="/Login"
-                                                                                                 className="nav-item nav-link text-decoration-none"
-                                                                                                 style={{color: "white"}}>Login</Link>
-                                    </button>
+                                    <Link onClick={toggleProfilePopup} to="/Login"
+                                          className="login-button text-decoration-none"
+                                          style={{color: "white"}}>Login</Link>
+
                                     <div style={{color: "black", marginTop: "1em"}}>New User?</div>
-                                    <button className="register-button" onClick={toggleProfilePopup}><Link to="/Register"
-                                                                                                    className="nav-item nav-link text-decoration-none"
-                                                                                                    style={{color: "black"}}>Register</Link>
-                                    </button>
+                                    <Link to="/Register"
+                                          onClick={toggleProfilePopup}
+                                          className="register-button text-decoration-none"
+                                          style={{color: "black"}}>Register</Link>
+
                                 </div>)}
                         </div>
                     ) : null}

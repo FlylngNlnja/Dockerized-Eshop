@@ -81,7 +81,28 @@
 }
 
 .popup .login-button {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #4fe76e; /* Χρώμα για το Login button */
+    color: black;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    height: 38px;
+}
+
+#regpopup{
+    display: flex;
+    flex-direction: column;
+    gap:0.5em;
+}
+.popup .profile-button {
+    display: flex;
+    justify-content: center;
     width: 100%;
     margin-top: 10px;
     padding: 8px;
@@ -95,11 +116,12 @@
     height: 38px;
 }
 
+
 .popup .logout-button{
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    margin-top: 10px;
-    padding: 8px;
     background-color: #dc1616; /* Χρώμα για το Login button */
     color: white;
     border: none;
@@ -115,16 +137,21 @@
 .popup .login-button:hover {
     background-color: #26e54d;
 }
+.popup .profile-button:hover {
+    background-color: #26e54d;
+}
 
 .popup .register-button {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    margin-top: 10px;
-    padding: 8px;
     background-color: #eec92a; /* Χρώμα για το Register button */
     border: 0;
-    border-radius: 10px;
+    border-radius: 3px;
     cursor: pointer;
+    height:38px;
+
 }
 
 
@@ -136,6 +163,10 @@
 .popup .login-button a {
     color: white; /* Χρώμα για το κείμενο του "Login" button */
 }
+.popup .profile-button a {
+    color: white; /* Χρώμα για το κείμενο του "Login" button */
+}
+
 
 .popup .register-button a {
     color: black; /* Χρώμα για το κείμενο του "Register" button */
