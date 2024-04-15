@@ -1,6 +1,7 @@
-DROP SCHEMA IF EXISTS `eshop`;
-CREATE SCHEMA `eshop`;
-use `eshop`;
+GRANT ALL PRIVILEGES ON eshop.* TO 'eshopuniwa_root'@'%' IDENTIFIED BY 'jkngbses3252523ekjfnw';
+FLUSH PRIVILEGES;
+CREATE DATABASE IF NOT EXISTS `eshop`;
+use eshop;
 
 CREATE TABLE `users` (
                          `id` INT NOT NULL AUTO_INCREMENT,
@@ -144,7 +145,7 @@ CREATE TABLE `role`(
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DELIMITER &
-CREATE DEFINER=`root`@`localhost` PROCEDURE `InsertRandomInventory`()
+CREATE DEFINER= 'eshopuniwa_root'@'localhost' PROCEDURE `InsertRandomInventory`()
 BEGIN
     DECLARE i INT DEFAULT 1;
     WHILE i <= 270 DO

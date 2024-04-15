@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  spring-boot-app:
+    container_name: spring-boot-app
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./spring-boot-app/target:/app/target
+    depends_on:
+      - database
+    networks:
+      - basic-network
+
+  react-app:
+    container_name: react-app
+    restart: always
+    depends_on:
+      - spring-boot-app
+    build:
+      context: ./react-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    volumes:
+      - ./react-frontend:/app
+    networks:
+      - basic-network
+
+
+  database:
+    build:
+      context: ./
+      dockerfile: Dockerfile-db
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: jkngbses3252523ekjfnw
+      MYSQL_DATABASE: eshop
+      MYSQL_USER: eshopuniwa_root
+      MYSQL_PASSWORD: jkngbses3252523ekjfnw
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - basic-network
+
+volumes:
+  db-data:
+
+networks:
+  basic-network:
+    driver: bridge
