@@ -27,7 +27,6 @@ const NavBar = () => {
     }, []);
     useEffect(() => {
         if (sessionStorage.getItem('token')) {
-            $('#isshow').hide();
             setLoggedin(true);
         }else{
             setLoggedin(false);
@@ -39,11 +38,6 @@ const NavBar = () => {
 
 
     function toggleProfilePopup() {
-        if (document.cookie.indexOf('token=') !== -1) {
-            $('#isshow').hide();
-        } else {
-            $('#isshow').show();
-        }
         if (!$('#isshow').length) {
             navigate('/MyProfile');
         } else {
