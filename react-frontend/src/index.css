@@ -49,6 +49,12 @@
     width:100%;
   }
 
+  @media screen and (max-width: 770px) {
+    .button-container {
+      flex-direction: column; /* Αλλαγή του κατευθυντήριου άξονα σε κατακόρυφο */
+    }
+  }
+
 
 
 

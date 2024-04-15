@@ -19,6 +19,7 @@
     height: 100px;
     align-items: center;
     padding-top: 100px;
+    padding-bottom:10em;
 }
 .Footer .Credits{
     padding-top: 50px;
@@ -36,3 +37,8 @@
 .Footer a {
     color: rgb(0, 255, 183);
 }
+
+.Footer a:hover {
+    color: #02b3fa;
+}
+
