@@ -23,6 +23,10 @@
 }
 .Footer .Credits{
     padding-top: 50px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: auto auto;
+    column-gap: 10%;
 }
 
 .Frameworks i:hover{

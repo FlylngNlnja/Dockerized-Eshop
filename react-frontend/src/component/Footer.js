@@ -13,14 +13,22 @@ const Footer = () => {
 
                </div>
                <div className="Credits">
-                   <a className="text-decoration-none" href="https://github.com/ChrisMi1" target="_blank"
-                      rel="noreferrer"> Christos M.</a><br/>Fullstack<br/><br/>
-                   <a className="text-decoration-none" href="https://github.com/FlylngNlnja" target="_blank"
-                      rel="noreferrer"> Christos S.</a> <br/>Fullstack<br/><br/>
-                   <a className="text-decoration-none" href="https://github.com/Gsotis" target="_blank"
-                      rel="noreferrer"> Gsotis</a> <br/>Frontend<br/><br/>
-                   <a className="text-decoration-none" href="https://github.com/ghintipas0" target="_blank"
-                      rel="noreferrer"> Ghintipas</a><br/>Frontend
+                   <div>
+                       <a className="text-decoration-none" href="https://github.com/ChrisMi1" target="_blank"
+                          rel="noreferrer"> Christos M.</a> <br/>Fullstack
+                   </div>
+                   <div>
+                       <a className="text-decoration-none" href="https://github.com/FlylngNlnja" target="_blank"
+                          rel="noreferrer"> Christos S.</a> <br/>Fullstack<br/><br/>
+                   </div>
+                   <div>
+                       <a className="text-decoration-none" href="https://github.com/Gsotis" target="_blank"
+                          rel="noreferrer"> Gsotis</a> <br/>Frontend<br/><br/>
+                   </div>
+                   <div>
+                       <a className="text-decoration-none" href="https://github.com/ghintipas0" target="_blank"
+                          rel="noreferrer"> Ghintipas</a><br/>Frontend
+                   </div>
                </div>
 
            </div>
